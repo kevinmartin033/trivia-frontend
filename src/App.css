@@ -14,7 +14,6 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,6 +25,31 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.game-container {
+  background-color: rgba(235, 173, 233, 0.85);
+  border-radius: 2%;
+}
+
+.title-text {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 50pt;
+  color: #61dafb;
+  text-align: center;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.game-button {
+  background-color: rgba(235, 88, 233, 1);
+  border-radius: 5%;
 }
 
 @keyframes App-logo-spin {
