@@ -30,6 +30,7 @@
 .game-container {
   background-color: rgba(235, 173, 233, 0.85);
   border-radius: 2%;
+  height: 100%;
 }
 
 .title-text {
@@ -37,6 +38,38 @@
   font-size: 50pt;
   color: #61dafb;
   text-align: center;
+}
+
+.white-bg {
+  background-color: white;
+  font-family: 'Kaushan Script', cursive;
+  font-size: 16pt;
+  font-weight: 300;
+  text-align: center;
+}
+
+
+.game-text {
+  font-family: 'Kaushan Script', cursive;
+  font-size: 20pt;
+  font-weight: 400;
+  text-align: center;
+}
+
+.rotate {
+  animation: rotation 1.5s infinite linear alternate;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(-90deg);
+  }
+  50% {
+    transform: rotate(-40deg);
+  }
+  100%{
+    transform: rotate(10deg);
+  }
 }
 
 .full-height {

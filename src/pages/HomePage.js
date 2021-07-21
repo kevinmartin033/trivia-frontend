@@ -8,11 +8,10 @@ class HomePageClass extends React.Component {
     constructor() {
         super();
         this.joinGame = this.joinGame.bind(this);
-        console.log('home page')
     }
 
     joinGame() {
-        // Join a game & 
+        // Join a game & redirect to the lobby
         const url = API_URL + '/join_game/'
         fetch(url)
         .then(res => res.json())
