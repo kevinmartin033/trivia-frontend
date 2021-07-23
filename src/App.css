@@ -42,7 +42,7 @@
 
 .white-bg {
   background-color: white;
-  font-family: 'Kaushan Script', cursive;
+  font-family: 'Libre Baskerville', cursive;
   font-size: 16pt;
   font-weight: 300;
   text-align: center;
@@ -50,10 +50,14 @@
 
 
 .game-text {
-  font-family: 'Kaushan Script', cursive;
+  font-family: 'Libre Baskerville', cursive;
   font-size: 20pt;
   font-weight: 400;
   text-align: center;
+}
+
+.correct-answer {
+  color: green;
 }
 
 .rotate {
