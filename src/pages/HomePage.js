@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/planet.webp';
-import { API_URL } from '../contants';
+import { API_URL } from '../constants';
 import { withRouter } from 'react-router-dom'
 
 class HomePageClass extends React.Component {

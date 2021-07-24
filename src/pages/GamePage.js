@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL, SOCKET_URL } from '../contants';
+import { API_URL, SOCKET_URL } from '../constants';
 import GameContainer from '../containers/GameContainer';
 import { withRouter } from 'react-router';
 
