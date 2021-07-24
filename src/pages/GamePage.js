@@ -1,14 +1,16 @@
 import React from 'react';
 import { API_URL, SOCKET_URL } from '../contants';
-import GameComponent from '../components/GameComponent';
+import GameContainer from '../containers/GameContainer';
 import { withRouter } from 'react-router';
 
 const LOBBY_STATE = {
     gameState: 'In Lobby',
     answers: [],
+    questionMetrics: {},
     playerCount: 0,
     questionText: '',
     questionId: '',
+    timer: -1,
     correctAnswer: null
 
 }
@@ -18,12 +20,12 @@ class GamePage extends React.Component {
     constructor(props) {
         super(props)
         this.state = LOBBY_STATE
-        console.log(this.state.gameState)
         this.handleEvent = this.handleEvent.bind(this);
         this.pingStartTime = this.pingStartTime.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
         this.joinGame = this.joinGame.bind(this);
+        this.questionMetrics = this.questionMetrics.bind(this);
     }
 
     componentDidMount() {
@@ -59,9 +61,17 @@ class GamePage extends React.Component {
             case "player_count":
                 this.setState({
                     playerCount: data.message,
-                    startTime: data.start_time + 1
+                    timer: Math.ceil(data.start_time)
                 })
-                setTimeout(this.pingStartTime, (data.start_time + 1) * 1000)
+                if (this.timer) {
+                    clearInterval(this.timer);
+                }
+                this.timer = setInterval(() => {
+                        this.setState({timer: this.state.timer - 1})
+                    }
+                    , 1000
+                );
+                this.nextStep = setTimeout(this.pingStartTime, (data.start_time + 1) * 1000)
                 break;
             case "start_game": 
                 this.setState({
@@ -77,24 +87,48 @@ class GamePage extends React.Component {
                     questionText: data.question_text,
                     questionId: data.question_id,
                     answers: data.answers,
+                    timer: Math.ceil(data.expiry),
                     gameState: 'Answering'
                 })
+                if (this.timer){
+                    clearInterval(this.timer);
+                }
+                this.nextStep = setTimeout(this.questionMetrics, (data.expiry) * 1000)
+                this.timer = setInterval(() => {
+                        this.setState({timer: this.state.timer - 1})
+                    }
+                    , 1000
+                );
                 break;
             case "late_answer":
-                debugger;
-                break
+                this.setState({
+                    gameState: "Late Answer",
+                    correctAnswer: data.correct_answer
+                })
+                break;
             case "correct_answer":
                 this.setState({
                     gameState: "Correct Answer",
-                    correctAnswer: data.correct_answer
+                    correctAnswer: data.correct_answer,
+                });
+                break;
+            case "question_metrics":
+                this.setState({
+                    gameState: "Between Questions",
+                    correctAnswer: data.correct_answer,
+                    questionMetrics: data.metrics,
+                    timer: Math.ceil(data.expiry)
                 })
-                setTimeout(this.nextQuestion, (data.next_question) * 1000)
+                clearTimeout(this.nextStep)
+                this.nextStep = setTimeout(this.nextQuestion, (data.expiry) * 1000)
                 break;
             case "incorrect_answer":
                 this.setState({
                     gameState: "Incorrect Answer",
                     correctAnswer: data.correct_answer
                 })
+                clearInterval(this.timer);
+                clearTimeout(this.nextStep);
                 break;
             case "error_answer":
                 debugger;
@@ -111,6 +145,7 @@ class GamePage extends React.Component {
     }
 
     pingStartTime() {
+        clearInterval(this.timer);
         if (this.state.gameState == 'In Lobby') {
             this.socket.send(JSON.stringify({
                 'code': 'game.start'
@@ -119,13 +154,23 @@ class GamePage extends React.Component {
     }
 
     nextQuestion() {
-        if (this.state.gameState == 'Correct Answer') {
+        if (this.state.gameState == 'Between Questions') {
             this.socket.send(JSON.stringify({
                 'code': 'game.next_question'
             }))
         }
     }
 
+    questionMetrics() {
+        if (this.state.gameState == 'Correct Answer') {
+            this.socket.send(JSON.stringify({
+                'code': 'game.question_metrics',
+                'question_id': this.state.questionId
+            }));
+        } else {
+            this.submitAnswer('A');
+        }
+    }
 
     render() {
         return(
@@ -144,7 +189,7 @@ class GamePage extends React.Component {
                         <div className="grid-x full-height">
                             <div className="cell small-3"></div>
                                 <div className="cell small-6 game-container">
-                                    <GameComponent
+                                    <GameContainer
                                         playerCount={this.state.playerCount}
                                         gameState={this.state.gameState}
                                         questionText={this.state.questionText}
@@ -153,6 +198,8 @@ class GamePage extends React.Component {
                                         submitAnswer={this.submitAnswer}
                                         correctAnswer={this.state.correctAnswer}
                                         joinGame={this.joinGame}
+                                        timer={this.state.timer}
+                                        questionMetrics={this.state.questionMetrics}
                                     />
                                 </div>
                             </div>

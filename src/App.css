@@ -41,13 +41,38 @@
 }
 
 .white-bg {
-  background-color: white;
+  /* background-color: white; */
   font-family: 'Libre Baskerville', cursive;
   font-size: 16pt;
   font-weight: 300;
-  text-align: center;
+  /* text-align: center; */
 }
 
+.timer {
+  font-family: 'Fira Sans', cursive;
+  font-size: 80pt;
+  font-weight: 300;
+  text-align: center;
+  animation: color-changer 4s infinite ;
+
+  
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: #6efdff;
+}
+
+.orange {
+  color: orange;
+}
+
+.purple {
+  color: #ca67f5;
+}
 
 .game-text {
   font-family: 'Libre Baskerville', cursive;
