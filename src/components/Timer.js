@@ -11,7 +11,7 @@ export default class Timer extends React.Component {
     render() {
         const fontColor = colors[this.props.timer % 3]
         return (
-            <div className={`cell small-2 medium-4 center-align timer ${fontColor}`}>{this.props.timer}</div>
+            <div className={`cell small-2 medium-4 center-align timer ${fontColor}`}>{Math.max(this.props.timer, 0)}</div>
         )
     }
 

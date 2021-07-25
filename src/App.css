@@ -41,7 +41,7 @@
 }
 
 .question-text {
-  font-family: 'Raleway', cursive;
+  font-family: 'Raleway', sans-serif;
   font-size: 16pt;
   font-weight: 300;
 }
@@ -131,6 +131,7 @@
 
   .question-text {
     font-size: 14pt;
+    font-family: 'Raleway', sans-serif;
   }
   
   .game-text {
