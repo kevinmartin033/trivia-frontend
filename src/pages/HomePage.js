@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/planet.webp';
 import { API_URL } from '../constants';
 import { withRouter } from 'react-router-dom'
+import Title from '../components/Title';
 
 class HomePageClass extends React.Component {
 
@@ -24,25 +25,19 @@ class HomePageClass extends React.Component {
 
     render() {
         return(
-            <div className="grid-y medium-grid-frame">
+            <div className="grid-y" style={{'height': '800px'}}>
                 <div className="cell small-1"></div>
                 <div className="cell small-2">
-                    <div className="grid-container full-height">
-                        <div className="grid-x full-height">
-                            <div className="cell small-3"></div>
-                            <div className="cell small-6 title-text">Trivia Time</div>
-                        </div>
-                    </div>
+                    <Title />
                 </div>
                 <div className="cell small-8">
                     <div className="grid-container full-height">
                         <div className="grid-x full-height">
-                            <div className="cell small-3"></div>
-                            <div className="cell small-6 game-container">
+                            <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
                                 <div className="grid-y medium-grid-frame">
                                     <div className="cell small-1"></div>
                                     <div className="cell small-7 center-align">
-                                        <img src={logo} alt="Planet icon" className="full-height"/>    
+                                        <img src={logo} alt="Planet icon" className="full-height image-contain"/>    
                                     </div>
                                     <div className="cell small-1"></div>
                                     <div className="cell small-2 center-align">

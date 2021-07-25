@@ -11,17 +11,16 @@ export default class GameComponent extends React.Component {
     }
 
     render() {
-        console.log(this.props.gameState)
         return (
-            <div className="grid-y medium-grid-frame">
+            <div className="grid-y" style={{"height": "80vh", "maxHeight": "800px", "minHeight": "400px"}}>
                 {
                     this.props.gameState == 'In Lobby' ?
                         <React.Fragment>
-                            <div className="cell small-1"></div>
-                            <div className="cell small-6 center-align">
-                                <img src={logo} alt="Icecream icon" className="full-height rotate"/>    
+                            <div className="cell small-1 medium-1"></div>
+                            <div className="cell small-4 medium-6 center-align">
+                                <img src={logo} alt="Icecream icon" className="full-height rotate image-contain"/>    
                             </div>
-                            <div className="cell small-1"></div>
+                            <div className="cell small-2"></div>
                             <div className="cell small-2 center-align game-text">
                                 Game will begin shortly, there are currently {this.props.playerCount} players waiting 
                             </div>
@@ -35,11 +34,11 @@ export default class GameComponent extends React.Component {
                                 <div className="grid-x full-height">
                                     <div className="cell small-2"></div>
                                     <div className="cell small-8">
-                                        <div className="grid-y medium-grid-frame">
+                                        <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-2 white-bg">{this.props.questionText}</div>
-                                            <div className="cell small-1"></div>
+                                            <div className="cell small-3 medium-2 white-bg">{this.props.questionText}</div>
+                                            <div className="cell small-2 medium-1"></div>
                                             <div className={`cell small-1 white-bg ${this.props.correctAnswer == "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}</div>
                                             <div className={`cell small-1 white-bg ${this.props.correctAnswer == "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}</div>
                                             <div className={`cell small-1 white-bg ${this.props.correctAnswer == "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}</div>
@@ -57,7 +56,7 @@ export default class GameComponent extends React.Component {
                         <React.Fragment>
                             <div className="cell small-1"></div>
                             <div className="cell small-4 center-align">
-                                <img src={frown} alt="frown" className="full-height"/>    
+                                <img src={frown} alt="frown" className="full-height image-contain"/>    
                             </div>
                                 <div className="cell small-1"></div>
                                 {
@@ -100,11 +99,11 @@ export default class GameComponent extends React.Component {
                                 <div className="grid-x full-height">
                                     <div className="cell small-2"></div>
                                     <div className="cell small-8">
-                                        <div className="grid-y medium-grid-frame">
+                                        <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-2 white-bg">{this.props.questionText}</div>
-                                            <div className="cell small-1"></div>
+                                            <div className="cell small-3 medium-2 white-bg">{this.props.questionText}</div>
+                                            <div className="cell small-2 medium-1"></div>
                                             <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("A")}>A. {this.props.answers && this.props.answers['A']}</div>
                                             <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("B")}>B. {this.props.answers && this.props.answers['B']}</div>
                                             <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("C")}>C. {this.props.answers && this.props.answers['C']}</div>

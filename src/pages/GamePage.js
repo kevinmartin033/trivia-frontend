@@ -1,7 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import { API_URL, SOCKET_URL } from '../constants';
 import GameContainer from '../containers/GameContainer';
-import { withRouter } from 'react-router';
+import Title from '../components/Title';
 
 const LOBBY_STATE = {
     gameState: 'In Lobby',
@@ -174,21 +175,16 @@ class GamePage extends React.Component {
 
     render() {
         return(
-            <div className="grid-y medium-grid-frame">
+            <div className="grid-y">
                 <div className="cell small-1"></div>
                 <div className="cell small-2">
-                    <div className="grid-container full-height">
-                        <div className="grid-x full-height">
-                            <div className="cell small-3"></div>
-                            <div className="cell small-6 title-text">Trivia Time</div>
-                        </div>
-                    </div>
+                    <Title />
                 </div>
                 <div className="cell small-8">
                     <div className="grid-container full-height">
                         <div className="grid-x full-height">
                             <div className="cell small-3"></div>
-                                <div className="cell small-6 game-container">
+                                <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
                                     <GameContainer
                                         playerCount={this.state.playerCount}
                                         gameState={this.state.gameState}

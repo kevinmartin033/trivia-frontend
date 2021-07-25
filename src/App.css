@@ -54,8 +54,6 @@
   font-weight: 300;
   text-align: center;
   animation: color-changer 4s infinite ;
-
-  
 }
 
 .red {
@@ -85,8 +83,13 @@
   color: green;
 }
 
+.image-contain {
+  object-fit: contain;
+}
+
 .rotate {
   animation: rotation 1.5s infinite linear alternate;
+  width: 80%;
 }
 
 @keyframes rotation {
@@ -121,4 +124,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width: 39.9375em) {
+  .timer {
+    font-size: 45pt;
+  }
+
 }
