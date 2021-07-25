@@ -47,7 +47,7 @@
 }
 
 .timer {
-  font-family: 'Fira Sans', sans-serif;;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 80pt;
   font-weight: 300;
   text-align: center;
@@ -131,7 +131,7 @@
 
   .question-text {
     font-size: 14pt;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
   }
   
   .game-text {
