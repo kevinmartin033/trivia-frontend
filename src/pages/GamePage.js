@@ -175,34 +175,29 @@ class GamePage extends React.Component {
 
     render() {
         return(
-            <div className="grid-y">
-                <div className="cell small-1"></div>
-                <div className="cell small-2">
-                    <Title />
-                </div>
-                <div className="cell small-8">
+            <div className="grid-y" style={{'height': '100vh'}}>
+                <div className="cell small-2"><Title /></div>
+                <div className="cell small-9">
                     <div className="grid-container full-height">
                         <div className="grid-x full-height">
-                            <div className="cell small-3"></div>
-                                <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
-                                    <GameContainer
-                                        playerCount={this.state.playerCount}
-                                        gameState={this.state.gameState}
-                                        questionText={this.state.questionText}
-                                        questionId={this.state.questionId}
-                                        answers={this.state.answers}
-                                        submitAnswer={this.submitAnswer}
-                                        correctAnswer={this.state.correctAnswer}
-                                        joinGame={this.joinGame}
-                                        timer={this.state.timer}
-                                        questionMetrics={this.state.questionMetrics}
-                                    />
-                                </div>
+                            <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
+                                <GameContainer
+                                    playerCount={this.state.playerCount}
+                                    gameState={this.state.gameState}
+                                    questionText={this.state.questionText}
+                                    questionId={this.state.questionId}
+                                    answers={this.state.answers}
+                                    submitAnswer={this.submitAnswer}
+                                    correctAnswer={this.state.correctAnswer}
+                                    joinGame={this.joinGame}
+                                    timer={this.state.timer}
+                                    questionMetrics={this.state.questionMetrics}
+                                />
                             </div>
                         </div>
                     </div>
-                    <div className="cell small-3"></div>
                 </div>
+            </div>
         )
     }
 }
