@@ -37,12 +37,12 @@ export default class GameComponent extends React.Component {
                                         <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-3 medium-2 white-bg">{this.props.questionText}</div>
+                                            <div className="cell small-3 medium-2 game-text">{this.props.questionText}</div>
                                             <div className="cell small-2 medium-1"></div>
-                                            <div className={`cell small-1 white-bg ${this.props.correctAnswer == "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}</div>
-                                            <div className={`cell small-1 white-bg ${this.props.correctAnswer == "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}</div>
-                                            <div className={`cell small-1 white-bg ${this.props.correctAnswer == "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}</div>
-                                            <div className={`cell small-1 white-bg ${this.props.correctAnswer == "D"? "correct-answer": ""}`}>D. {this.props.answers && this.props.answers['D']}</div>
+                                            <div className={`cell small-1 game-text ${this.props.correctAnswer == "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}</div>
+                                            <div className={`cell small-1 game-text ${this.props.correctAnswer == "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}</div>
+                                            <div className={`cell small-1 game-text ${this.props.correctAnswer == "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}</div>
+                                            <div className={`cell small-1 game-text ${this.props.correctAnswer == "D"? "correct-answer": ""}`}>D. {this.props.answers && this.props.answers['D']}</div>
                                         </div>
                                     </div>
                                     <div className="cell small-2"></div>
@@ -102,12 +102,12 @@ export default class GameComponent extends React.Component {
                                         <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-3 medium-2 white-bg">{this.props.questionText}</div>
+                                            <div className="cell small-3 medium-2 game-text">{this.props.questionText}</div>
                                             <div className="cell small-2 medium-1"></div>
-                                            <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("A")}>A. {this.props.answers && this.props.answers['A']}</div>
-                                            <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("B")}>B. {this.props.answers && this.props.answers['B']}</div>
-                                            <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("C")}>C. {this.props.answers && this.props.answers['C']}</div>
-                                            <div className="cell small-1 white-bg" onClick={() => this.props.submitAnswer("D")}>D. {this.props.answers && this.props.answers['D']}</div>
+                                            <div className="cell small-1 game-text" onClick={() => this.props.submitAnswer("A")}>A. {this.props.answers && this.props.answers['A']}</div>
+                                            <div className="cell small-1 game-text" onClick={() => this.props.submitAnswer("B")}>B. {this.props.answers && this.props.answers['B']}</div>
+                                            <div className="cell small-1 game-text" onClick={() => this.props.submitAnswer("C")}>C. {this.props.answers && this.props.answers['C']}</div>
+                                            <div className="cell small-1 game-text" onClick={() => this.props.submitAnswer("D")}>D. {this.props.answers && this.props.answers['D']}</div>
                                         </div>
                                     </div>
                                     <div className="cell small-2"></div>

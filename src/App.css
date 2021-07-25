@@ -40,12 +40,10 @@
   text-align: center;
 }
 
-.white-bg {
-  /* background-color: white; */
+.game-text {
   font-family: 'Libre Baskerville', cursive;
   font-size: 16pt;
   font-weight: 300;
-  /* text-align: center; */
 }
 
 .timer {
