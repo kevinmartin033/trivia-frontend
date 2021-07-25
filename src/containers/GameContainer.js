@@ -3,6 +3,7 @@ import logo from '../assets/icecream.png';
 import frown from '../assets/frown.png';
 import Timer from '../components/Timer';
 import QuestionStats from '../components/QuestionStats';
+import Winner from '../components/Winner';
 
 export default class GameComponent extends React.Component {
 
@@ -12,9 +13,9 @@ export default class GameComponent extends React.Component {
 
     render() {
         return (
-            <div className="grid-y" style={{"height": "80vh", "maxHeight": "800px", "minHeight": "400px"}}>
+            <div className="grid-y" style={{"height": "100%", "maxHeight": "800px", "minHeight": "400px"}}>
                 {
-                    this.props.gameState == 'In Lobby' ?
+                    this.props.gameState === 'In Lobby' ?
                         <React.Fragment>
                             <div className="cell small-1 medium-1"></div>
                             <div className="cell small-4 medium-6 center-align">
@@ -27,7 +28,7 @@ export default class GameComponent extends React.Component {
                             <div className="cell small-2"></div>
                         </React.Fragment>
                     :
-                    this.props.gameState == 'Correct Answer'?
+                    this.props.gameState === 'Correct Answer'?
                         <React.Fragment>
                             <div className="cell small-1"></div>
                             <div className="cell small-10">
@@ -37,12 +38,12 @@ export default class GameComponent extends React.Component {
                                         <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-3 medium-2 question-text">{this.props.questionText}</div>
+                                            <div className="cell small-3 medium-2 question-text">{this.props.questionNumber}. {this.props.questionText}</div>
                                             <div className="cell small-2 medium-1"></div>
-                                            <div className={`cell small-1 question-text ${this.props.correctAnswer == "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}</div>
-                                            <div className={`cell small-1 question-text ${this.props.correctAnswer == "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}</div>
-                                            <div className={`cell small-1 question-text ${this.props.correctAnswer == "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}</div>
-                                            <div className={`cell small-1 question-text ${this.props.correctAnswer == "D"? "correct-answer": ""}`}>D. {this.props.answers && this.props.answers['D']}</div>
+                                            <div className={`cell small-1 question-text ${this.props.correctAnswer === "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}</div>
+                                            <div className={`cell small-1 question-text ${this.props.correctAnswer === "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}</div>
+                                            <div className={`cell small-1 question-text ${this.props.correctAnswer === "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}</div>
+                                            <div className={`cell small-1 question-text ${this.props.correctAnswer === "D"? "correct-answer": ""}`}>D. {this.props.answers && this.props.answers['D']}</div>
                                         </div>
                                     </div>
                                     <div className="cell small-2"></div>
@@ -52,7 +53,7 @@ export default class GameComponent extends React.Component {
                         </React.Fragment>
                     
                     :
-                    this.props.gameState == 'Incorrect Answer' || this.props.gameState == 'Late Answer' ?
+                    this.props.gameState === 'Incorrect Answer' || this.props.gameState === 'Late Answer' ?
                         <React.Fragment>
                             <div className="cell small-1"></div>
                             <div className="cell small-4 center-align">
@@ -60,7 +61,7 @@ export default class GameComponent extends React.Component {
                             </div>
                                 <div className="cell small-1"></div>
                                 {
-                                    this.props.gameState == 'Incorrect Answer' ?
+                                    this.props.gameState === 'Incorrect Answer' ?
                                         <div className="cell small-1 center-align game-text">
                                             Incorrect answer, the correct answer was: {this.props.correctAnswer}. {this.props.answers[this.props.correctAnswer]}
                                         </div>:
@@ -86,11 +87,18 @@ export default class GameComponent extends React.Component {
                     :
                     this.props.gameState === "Between Questions"?
                         <QuestionStats
-                            questionText={this.props.questionText}    
+                            questionText={this.props.questionText}
+                            questionNumber={this.props.questionNumber} 
                             correctAnswer={this.props.correctAnswer}
                             questionMetrics={this.props.questionMetrics}
                             answers={this.props.answers}
                             timer={this.props.timer}
+                        />
+                    :
+                    this.props.gameState === "Winner" ?
+                        <Winner 
+                            joinGame={this.props.joinGame}
+                            otherWinners={this.props.otherWinners}
                         />
                     :
                         <React.Fragment>
@@ -102,7 +110,7 @@ export default class GameComponent extends React.Component {
                                         <div className="grid-y full-height">
                                             <Timer timer={this.props.timer} />
                                             <div className="cell small-1"></div>
-                                            <div className="cell small-3 medium-2 question-text">{this.props.questionText}</div>
+                                            <div className="cell small-3 medium-2 question-text">{this.props.questionNumber}. {this.props.questionText}</div>
                                             <div className="cell small-2 medium-1"></div>
                                             <div className="cell small-1 question-text" onClick={() => this.props.submitAnswer("A")}>A. {this.props.answers && this.props.answers['A']}</div>
                                             <div className="cell small-1 question-text" onClick={() => this.props.submitAnswer("B")}>B. {this.props.answers && this.props.answers['B']}</div>

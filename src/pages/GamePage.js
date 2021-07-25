@@ -11,6 +11,8 @@ const LOBBY_STATE = {
     playerCount: 0,
     questionText: '',
     questionId: '',
+    questionNumber: -1,
+    totalWinners: 0,
     timer: -1,
     correctAnswer: null
 
@@ -62,7 +64,7 @@ class GamePage extends React.Component {
             case "player_count":
                 this.setState({
                     playerCount: data.message,
-                    timer: Math.ceil(data.start_time)
+                    timer: Math.floor(data.start_time)
                 })
                 if (this.timer) {
                     clearInterval(this.timer);
@@ -80,15 +82,16 @@ class GamePage extends React.Component {
                 })
                 break;
             case "next_question":
-                if (this.state.gameState == 'Answering'){
-                    console.log('goofeeeed')
+                if (this.state.gameState === 'Answering'){
+                    this.submitAnswer('A');
                     break;
                 }
                 this.setState({
                     questionText: data.question_text,
                     questionId: data.question_id,
+                    questionNumber: data.question_number,
                     answers: data.answers,
-                    timer: Math.ceil(data.expiry),
+                    timer: Math.floor(data.expiry),
                     gameState: 'Answering'
                 })
                 if (this.timer){
@@ -118,7 +121,7 @@ class GamePage extends React.Component {
                     gameState: "Between Questions",
                     correctAnswer: data.correct_answer,
                     questionMetrics: data.metrics,
-                    timer: Math.ceil(data.expiry)
+                    timer: Math.floor(data.expiry)
                 })
                 clearTimeout(this.nextStep)
                 this.nextStep = setTimeout(this.nextQuestion, (data.expiry) * 1000)
@@ -130,6 +133,18 @@ class GamePage extends React.Component {
                 })
                 clearInterval(this.timer);
                 clearTimeout(this.nextStep);
+                break;
+            case "game_winner":
+                clearInterval(this.timer);
+                clearTimeout(this.nextStep);
+                this.setState({
+                    gameState: "Winner"
+                })
+                break;
+            case "new_winner":
+                this.setState({
+                    totalWinners: this.state.totalWinners + 1
+                })
                 break;
             case "error_answer":
                 debugger;
@@ -147,7 +162,7 @@ class GamePage extends React.Component {
 
     pingStartTime() {
         clearInterval(this.timer);
-        if (this.state.gameState == 'In Lobby') {
+        if (this.state.gameState === 'In Lobby') {
             this.socket.send(JSON.stringify({
                 'code': 'game.start'
             }))
@@ -155,7 +170,7 @@ class GamePage extends React.Component {
     }
 
     nextQuestion() {
-        if (this.state.gameState == 'Between Questions') {
+        if (this.state.gameState === 'Between Questions') {
             this.socket.send(JSON.stringify({
                 'code': 'game.next_question'
             }))
@@ -163,7 +178,7 @@ class GamePage extends React.Component {
     }
 
     questionMetrics() {
-        if (this.state.gameState == 'Correct Answer') {
+        if (this.state.gameState === 'Correct Answer') {
             this.socket.send(JSON.stringify({
                 'code': 'game.question_metrics',
                 'question_id': this.state.questionId
@@ -176,8 +191,9 @@ class GamePage extends React.Component {
     render() {
         return(
             <div className="grid-y" style={{'height': '100vh'}}>
+                <div className="cell small-1"></div>
                 <div className="cell small-2"><Title /></div>
-                <div className="cell small-9">
+                <div className="cell small-8">
                     <div className="grid-container full-height">
                         <div className="grid-x full-height">
                             <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
@@ -186,12 +202,14 @@ class GamePage extends React.Component {
                                     gameState={this.state.gameState}
                                     questionText={this.state.questionText}
                                     questionId={this.state.questionId}
+                                    questionNumber={this.state.questionNumber}
                                     answers={this.state.answers}
                                     submitAnswer={this.submitAnswer}
                                     correctAnswer={this.state.correctAnswer}
                                     joinGame={this.joinGame}
                                     timer={this.state.timer}
                                     questionMetrics={this.state.questionMetrics}
+                                    otherWinners={this.state.totalWinners - 1}
                                 />
                             </div>
                         </div>

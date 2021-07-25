@@ -25,7 +25,7 @@ class HomePageClass extends React.Component {
 
     render() {
         return(
-            <div className="grid-y" style={{'height': '800px'}}>
+            <div className="grid-y" style={{'height': '100vh'}}>
                 <div className="cell small-1"></div>
                 <div className="cell small-2">
                     <Title />

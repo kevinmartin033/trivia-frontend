@@ -41,13 +41,13 @@
 }
 
 .question-text {
-  font-family: 'Libre Baskerville', cursive;
+  font-family: 'Raleway', cursive;
   font-size: 16pt;
   font-weight: 300;
 }
 
 .timer {
-  font-family: 'Fira Sans', cursive;
+  font-family: 'Fira Sans', sans-serif;;
   font-size: 80pt;
   font-weight: 300;
   text-align: center;
@@ -131,6 +131,10 @@
 
   .question-text {
     font-size: 14pt;
+  }
+  
+  .game-text {
+    font-size: 16pt;
   }
 
 }
