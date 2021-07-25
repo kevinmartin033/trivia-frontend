@@ -16,7 +16,7 @@ export default class QuestionStats extends React.Component {
                     <div className="grid-x full-height">
                         <div className="cell small-2"></div>
                         <div className="cell small-8">
-                            <div className="grid-y full-heihgt">
+                            <div className="grid-y full-height">
                                 <Timer timer={this.props.timer} />
                                 <div className="cell small-1"></div>
                                 <div className="cell small-3 medium-2 question-text">{this.props.questionText}</div>
