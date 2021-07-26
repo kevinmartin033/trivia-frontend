@@ -24,6 +24,7 @@ class GamePage extends React.Component {
         super(props)
         this.state = LOBBY_STATE
         this.handleEvent = this.handleEvent.bind(this);
+        this.handleClose = this.handleClose.bind(this);
         this.pingStartTime = this.pingStartTime.bind(this);
         this.submitAnswer = this.submitAnswer.bind(this);
         this.nextQuestion = this.nextQuestion.bind(this);
@@ -35,6 +36,7 @@ class GamePage extends React.Component {
         this.socket = new WebSocket(SOCKET_URL + "/game" + this.props.location.pathname);
         
         this.socket.addEventListener('message', this.handleEvent);
+        this.socket.addEventListener('close', this.handleClose);
     }
 
     componentDidUpdate(props) {
@@ -42,6 +44,14 @@ class GamePage extends React.Component {
             this.socket = new WebSocket(SOCKET_URL + "/game" + this.props.location.pathname);
             this.socket.addEventListener('message', this.handleEvent);
             this.setState(LOBBY_STATE)
+        }
+    }
+
+    handleClose() {
+        if (this.state.gameState == 'In Lobby') {
+            this.setState({
+                gameState: 'Connection Error'
+            })
         }
     }
 

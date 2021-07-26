@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from '../assets/icecream.png';
 import frown from '../assets/frown.png';
-import Timer from '../components/Timer';
+import ConnectionError from '../components/ConnectionError';
 import QuestionStats from '../components/QuestionStats';
+import Timer from '../components/Timer';
 import Winner from '../components/Winner';
 
 export default class GameComponent extends React.Component {
@@ -100,6 +101,9 @@ export default class GameComponent extends React.Component {
                             joinGame={this.props.joinGame}
                             otherWinners={this.props.otherWinners}
                         />
+                    :
+                    this.props.gameState == "Connection Error"?
+                        <ConnectionError joinGame={this.props.joinGame}/>
                     :
                         <React.Fragment>
                             <div className="cell small-1"></div>
