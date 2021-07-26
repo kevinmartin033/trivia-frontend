@@ -16,14 +16,13 @@ export default class QuestionStats extends React.Component {
                         <div className="cell small-2"></div>
                         <div className="cell small-8">
                             <div className="grid-y full-height">
-                                <Timer timer={this.props.timer} />
-                                <div className="cell small-1"></div>
-                                <div className="cell small-3 medium-2 question-text">{this.props.questionNumber}. {this.props.questionText}</div>
-                                <div className="cell small-2 medium-1"></div>
-                                <div className="cell small-1 question-text">A. {this.props.answers && this.props.answers['A']}: {this.props.questionMetrics && this.props.questionMetrics['A']} / {total_votes}</div>
-                                <div className="cell small-1 question-text">B. {this.props.answers && this.props.answers['B']}: {this.props.questionMetrics && this.props.questionMetrics['B']} / {total_votes}</div>
-                                <div className="cell small-1 question-text">C. {this.props.answers && this.props.answers['C']}: {this.props.questionMetrics && this.props.questionMetrics['C']} / {total_votes}</div>
-                                <div className="cell small-1 question-text">D. {this.props.answers && this.props.answers['D']}: {this.props.questionMetrics && this.props.questionMetrics['D']} / {total_votes}</div>
+                                <Timer timer={this.props.timer} smallSize={2} mediumSize={2}/>
+                                <div className="cell small-4 medium-3 question-text" style={{'overflowY': 'scroll'}}>{this.props.questionNumber}. {this.props.questionText}</div>
+                                <div className="cell small-2 medium-3 question-text detail-text">Let's see how everyone else did</div>
+                                <div className={`cell small-1 question-text  answer-text ${this.props.correctAnswer === "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}: {this.props.questionMetrics && this.props.questionMetrics['A']}</div>
+                                <div className={`cell small-1 question-text  answer-text ${this.props.correctAnswer === "B"? "correct-answer": ""}`}>B. {this.props.answers && this.props.answers['B']}: {this.props.questionMetrics && this.props.questionMetrics['B']}</div>
+                                <div className={`cell small-1 question-text  answer-text ${this.props.correctAnswer === "C"? "correct-answer": ""}`}>C. {this.props.answers && this.props.answers['C']}: {this.props.questionMetrics && this.props.questionMetrics['C']}</div>
+                                <div className={`cell small-1 question-text  answer-text ${this.props.correctAnswer === "D"? "correct-answer": ""}`}>D. {this.props.answers && this.props.answers['D']}: {this.props.questionMetrics && this.props.questionMetrics['D']}</div>
                             </div>
                         </div>
                         <div className="cell small-2"></div>

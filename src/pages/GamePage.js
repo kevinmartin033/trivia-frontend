@@ -114,11 +114,15 @@ class GamePage extends React.Component {
                     , 1000
                 );
                 break;
+            case "next_question_started":
+                break;
             case "late_answer":
                 this.setState({
                     gameState: "Late Answer",
                     correctAnswer: data.correct_answer
-                })
+                });
+                clearInterval(this.timer);
+                clearTimeout(this.nextStep);
                 break;
             case "correct_answer":
                 this.setState({
@@ -182,7 +186,8 @@ class GamePage extends React.Component {
     nextQuestion() {
         if (this.state.gameState === 'Between Questions') {
             this.socket.send(JSON.stringify({
-                'code': 'game.next_question'
+                'code': 'game.next_question',
+                "question_id": this.state.questionId
             }))
         }
     }
@@ -206,7 +211,7 @@ class GamePage extends React.Component {
                 <div className="cell small-8">
                     <div className="grid-container full-height">
                         <div className="grid-x full-height">
-                            <div className="cell small-10 small-offset-1 medium-6 medium-offset-3 game-container">
+                            <div className="cell small-10 small-offset-1 medium-8 medium-offset-2 game-container">
                                 <GameContainer
                                     playerCount={this.state.playerCount}
                                     gameState={this.state.gameState}

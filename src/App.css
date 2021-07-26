@@ -31,6 +31,7 @@
   background-color: rgba(235, 173, 233, 0.85);
   border-radius: 2%;
   height: 100%;
+  overflow-y: scroll;
 }
 
 .title-text {
@@ -46,12 +47,21 @@
   font-weight: 300;
 }
 
+.answer-text {
+  overflow-x: scroll;
+}
+
 .timer {
   font-family: 'Fira Sans', sans-serif;
   font-size: 80pt;
   font-weight: 300;
   text-align: center;
   animation: color-changer 4s infinite ;
+}
+
+.detail-text {
+  color: #20568c;
+  font-weight: bolder;
 }
 
 .red {

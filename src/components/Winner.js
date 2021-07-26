@@ -22,7 +22,7 @@ export default class Winner extends React.Component {
                                 <div className="cell small-2 center-align">
                                     <div className="grid-container full-height">
                                         <div className="grid-x grid-margin-x full-height center-align">
-                                            <div className="cell small-8 small-offset-2">
+                                            <div className="cell small-12">
                                                 <div className="button game-button expanded" onClick={this.props.joinGame}>
                                                     Join Next Available Game
                                                 </div>
