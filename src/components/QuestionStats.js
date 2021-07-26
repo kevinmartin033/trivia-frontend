@@ -16,7 +16,7 @@ export default class QuestionStats extends React.Component {
                         <div className="cell small-2"></div>
                         <div className="cell small-8">
                             <div className="grid-y full-height">
-                                <Timer timer={this.props.timer} smallSize={2} mediumSize={2}/>
+                                <Timer timer={this.props.timer} smaller={true}/>
                                 <div className="cell small-4 medium-3 question-text" style={{'overflowY': 'scroll'}}>{this.props.questionNumber}. {this.props.questionText}</div>
                                 <div className="cell small-2 medium-3 question-text detail-text">Let's see how everyone else did</div>
                                 <div className={`cell small-1 question-text  answer-text ${this.props.correctAnswer === "A"? "correct-answer": ""}`}>A. {this.props.answers && this.props.answers['A']}: {this.props.questionMetrics && this.props.questionMetrics['A']}</div>

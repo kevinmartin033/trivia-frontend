@@ -59,6 +59,11 @@
   animation: color-changer 4s infinite ;
 }
 
+
+.timer.smaller {
+  font-size: 45pt;
+}
+
 .detail-text {
   color: #20568c;
   font-weight: bolder;
